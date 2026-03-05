@@ -389,8 +389,7 @@ def format_spot_info(spot: dict, distance_m: float | None = None,
 
     lines += [
         f"   📝 {spot.get('notes', '')}",
-        f"   🍎 Apple Maps → {apple_maps}",
-        f"   🗺 Google Maps → {google_maps}",
+        f"   [🍎 Apple Maps 導航]({apple_maps}) ｜ [🗺️ Google Maps 導航]({google_maps})",
     ]
 
     if include_parking:

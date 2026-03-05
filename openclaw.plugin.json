@@ -1,0 +1,36 @@
+{
+  "name": "surf-query",
+  "version": "1.0.0",
+  "description": "台灣衝浪浪點查詢，即時顯示潮汐、風況與一鍵導航。",
+  "author": "Harperbot",
+  "type": "executable",
+  "executable": {
+    "command": "python3",
+    "args": ["surf_query.py"]
+  },
+  "configSchema": {
+    "type": "object",
+    "properties": {
+      "CWA_API_KEY": {
+        "type": "string",
+        "description": "CWA 中央氣象署 API Key (用於潮汐與風況)"
+      }
+    }
+  },
+  "tools": [
+    {
+      "name": "query_surf_spots",
+      "description": "查詢台灣各地的衝浪浪點資訊。支援依名稱、地區、或經緯度查詢。",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "--query": { "type": "string", "description": "浪點名稱 (如: 東河) 或地區 (如: 宜蘭, east)" },
+          "--lat": { "type": "string", "description": "使用者目前緯度 (用於查詢附近浪點)" },
+          "--lon": { "type": "string", "description": "使用者目前經度" },
+          "--mode": { "type": "string", "enum": ["parking"], "description": "若傳入 'parking'，會連帶查詢浪點附近的停車場空位" },
+          "--list": { "type": "boolean", "description": "列出所有支援的浪點" }
+        }
+      }
+    }
+  ]
+}
