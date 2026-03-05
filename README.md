@@ -1,6 +1,12 @@
-# 🏄 surf_query
+# 🏄 openclaw-surf-query
 
 台灣衝浪浪點查詢 OpenClaw Skill，透過 Telegram、LINE 或 iMessage 搜尋浪點，即時顯示潮汐、風況、颱風動態與日出時間，並附一鍵導航連結。
+
+**🔥 最新版本更新：**
+* 🚀 **原生 OpenClaw 外掛支援**：新增 `openclaw.plugin.json`，現在支援直接透過 ClawHub 安裝，不需再手動修改設定檔。
+* ✨ **Markdown 輸出優化**：將原本冗長的網址升級為乾淨的 Inline Links（[🍎 Apple Maps 導航]）。
+
+[English Documentation](README.en.md) | 繁體中文
 
 ## 功能示範
 
@@ -13,25 +19,20 @@
    🟡 難度：中階　浪型：河口浪
    ✅ 現在（秋季）是好浪季節
    🌅 日出 05:52　🌇 日沒 17:48
-   🌊 潮汐：🔽乾潮 02:14（-87cm）　🔼滿潮 08:28（59cm）　🔽乾潮 14:06（-64cm）　🔼滿潮 20:18（80cm）
+   🌊 潮汐：🔽乾潮 02:14（-87cm）　🔼滿潮 08:28（59cm）
    💨 風況：偏北風 3級（4m/s）　✅ 離岸風，浪面整潔
    ⛅ 天氣：晴時多雲
    📝 台灣浪況最一致的浪點之一，東河溪口，冬季長浪穩定，礁石底
-   🍎 Apple Maps → https://maps.apple.com/?ll=23.0767,121.3424&q=東河
-   🗺 Google Maps → https://www.google.com/maps/search/?api=1&query=23.0767,121.3424
+   [🍎 Apple Maps 導航](https://...) ｜ [🗺️ Google Maps 導航](https://...)
 ```
 
 ## 特色
 
-- **30 個浪點資料庫**：北部、東北部（宜蘭）、東部（花蓮、台東）、南部（屏東、墾丁）、西部
+- **30 個浪點資料庫**：北部、東北部、東部、南部、西部
 - **多種查詢方式**：浪點名稱、地區名稱、GPS 座標（附近 30km 內）
-- **即時潮汐**：CWA 中央氣象署今日高低潮時間（高精度，依浪點配對最近測站）
-- **即時風況**：風速、風向，自動判斷離岸風（好浪）或向岸風（浪面雜亂）
-- **颱風動態**：顯示距台灣 2000km 內的活動颱風，超出範圍自動隱藏
+- **即時潮汐與風況**：CWA 中央氣象署即時資料，自動判斷離岸風（好浪）
+- **颱風動態**：顯示距台灣 2000km 內的活動颱風
 - **日出日落**：依浪點座標以天文公式精確計算
-- **難度分級**：🟢 初學者 / 🟡 初中階・中階 / 🟠 中進階 / 🔴 進階
-- **季節判斷**：自動標示現在是否為最佳浪季
-- **一鍵導航**：Apple Maps + Google Maps 導航連結
 - **串接停車查詢**：選用，需搭配 [parking_query](https://github.com/Harperbot/openclaw-parking-query) skill
 
 ## 前置需求
@@ -43,19 +44,6 @@
 ### 2. CWA API Key（免費）
 
 前往 [opendata.cwa.gov.tw](https://opendata.cwa.gov.tw) 註冊帳號，取得授權碼。
-
-在 `~/.openclaw/openclaw.json` 的 `env.vars` 加入：
-
-```json
-{
-  "env": {
-    "vars": {
-      "CWA_API_KEY": "CWA-你的授權碼"
-    }
-  }
-}
-```
-
 > 不設定也能使用，只是不會顯示即時潮汐、風況與颱風動態。
 
 ### 3. Python 套件
@@ -66,22 +54,29 @@ pip3 install requests
 
 ## 安裝
 
-```bash
-# 1. Clone 到 OpenClaw skills 目錄
-git clone https://github.com/Harperbot/openclaw-surf-query.git \
-  ~/.openclaw/skills/surf_query
-
-# 2. 設定 CWA API Key（見上方說明）
-
-# 3. 重啟 gateway
-openclaw restart
-```
-
-或透過 ClawHub 安裝：
+### 方式一：透過 ClawHub (推薦)
 
 ```bash
 clawhub install openclaw-surf-query
 ```
+
+安裝後，請在 OpenClaw 網頁儀表板的 Plugins 頁面中，為此技能填入 `CWA_API_KEY` (格式為 `CWA-你的授權碼`)。
+
+### 方式二：手動安裝
+
+```bash
+# 1. Clone 到 OpenClaw skills 目錄
+git clone https://github.com/Harperbot/openclaw-surf-query.git ~/.openclaw/skills/surf_query
+
+# 2. 透過 CLI 或是網頁介面設定 CWA_API_KEY
+
+# 3. 重啟 gateway
+openclaw gateway restart
+```
+
+## License
+
+MIT
 
 ## 直接執行（測試用）
 
